@@ -1,0 +1,23 @@
+{% extends "./header.html" %}
+{% block title %}Index{% endblock %}
+{% block html_head %}
+    <style type="text/css">
+        .important{
+            color: #333888;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1> Index file</h1>
+    <p class="important"> Welcome to first jinja templating</p>
+    {% for c in content%}
+	   <p>{{c}}</p>
+	{% endfor %}
+    {{animal}}
+{% endblock content %}
+
+{% block body %}
+    <h1> this is body from home </h1>
+{% endblock body %}
+
