@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.contrib import messages # in order for us to display messages
 # Create your views here.
 from django.contrib.auth import authenticate,login
+from rest_framework import viewsets, permissions
+from .serializers import UserSerializer,GroupSerializer
 
 def index(request):
     if request.session.get('UserLogin',False):
@@ -62,3 +64,14 @@ def handleSignup(request):
     #  (del) request.session['key'] = value
     #  request.session.get('key','default value') == ? 
         
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+

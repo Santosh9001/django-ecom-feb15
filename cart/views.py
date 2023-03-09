@@ -4,6 +4,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from cart.models import Cart, Order
 from products.models import Product
 
+from reportlab.pdfgen import canvas
+import io
+from django.http import FileResponse
+
 def add_to_cart(request, slug):
     item = get_object_or_404(Product, slug=slug)
     order_item, created = Cart.objects.get_or_create(
@@ -115,3 +119,11 @@ def decreaseCart(request, slug):
         return redirect("mainapp:cart-home")
     
 
+def generatePDF(request,id):
+    buffer = io.BytesIO()
+    x = canvas.Canvas(buffer)
+    x.drawString(100, 100, "Let's generate this pdf file.")
+    x.showPage()
+    x.save()
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename='attempt1.pdf')

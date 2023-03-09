@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
     'loginsignup',
     'personal',
     'cart.apps.CartConfig',
@@ -41,10 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
-    'ecommerce.middleware.LoginRequiredMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'products.middleware.Timing',
+    # 'ecommerce.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -127,13 +129,16 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-LOGIN_REDIRECT_URL='/loginsignup/'
-LOGIN_URL = '/accountslogin/'
 LOGIN_EXEMPT_URLS= {
-    r'^loginsignup/signup/$'
+    r'^loginsignup/signup/$',
+    r'^loginsignup/index/$',    
 }
+LOGIN_URL = 'admin/'
+# r'^[A-Z][a-z][0-9]@[a-z].com'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MESSAGE_TAGS  = {
     messages.ERROR: 'danger'
 }
+
+# pip install reportLab
