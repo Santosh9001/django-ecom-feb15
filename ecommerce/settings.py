@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
-    'loginsignup',
+    'loginsignup.apps.LoginsignupConfig',
     'personal',
     'cart.apps.CartConfig',
     'products.apps.ProductsConfig',
